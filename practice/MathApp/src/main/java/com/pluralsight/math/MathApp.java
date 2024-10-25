@@ -57,5 +57,12 @@ public class MathApp {
 
         double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         System.out.printf("The distance between the points (%.1f, %.1f) and (%.1f, %.1f) is: %.2f%n", x1, y1, x2, y2, distance);
+
+        System.out.println("QUESTION 6: ");
+        // The absolute value (also called the modulus) of a real number is its distance from zero
+        double variable = -3.8;
+        double absoluteValue = Math.abs(variable);
+
+        System.out.printf("The absolute value of %.1f is: %.1f%n", variable, absoluteValue);
     }
 }
