@@ -32,9 +32,14 @@ public class MathApp {
         System.out.println("The lowest price is: "+ formattedSmallestPrice);
 
 
+        System.out.println("QUESTION 3: ");
 
+        double radius = 7.25;
 
-        //Question 3:
+        double area = Math.PI * Math.pow(radius, 2);
+
+        System.out.printf("The area of the circle with radius %.2f is: %.2f%n", radius, area);
+
 
         //Question 4:
 
