@@ -64,5 +64,12 @@ public class MathApp {
         double absoluteValue = Math.abs(variable);
 
         System.out.printf("The absolute value of %.1f is: %.1f%n", variable, absoluteValue);
+
+
+        System.out.println("QUESTION 7: ");
+
+        double randomNumber = Math.random();
+        System.out.printf("A random number between 0 and 1 is: %.5f%n", randomNumber);
+
     }
 }
