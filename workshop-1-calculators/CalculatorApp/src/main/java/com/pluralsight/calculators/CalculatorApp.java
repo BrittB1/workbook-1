@@ -3,10 +3,8 @@
 package com.pluralsight.calculators;
 
 // These are import statements that tell Java I want to use these special tools
-
 import java.text.NumberFormat;
 import java.util.Scanner;
-
 
 // Class that encompasses all the code for the app
 public class CalculatorApp {
@@ -16,12 +14,13 @@ public class CalculatorApp {
      'userInput' is the name of our scanner variable. We can name it whatever we want but
      its best practice for the name to tell us about what it does. The benefit of making
       these variables private is that they only need to be created once*/
-    private Scanner userInput;
+
+    private final Scanner userInput;
     private NumberFormat currencyFormatter;
 
     //These statements let us add color to our text
     // 'public static final' means they can be used anywhere and won't change
-    // 'String RESET' just the text back to its normal color
+    // 'String RESET' just changes the text back to its normal color
 
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
@@ -63,22 +62,21 @@ public class CalculatorApp {
         currencyFormatter = NumberFormat.getCurrencyInstance();
 
     }
-
     private void displayMenu() {
         System.out.println(CYAN + """
-                        ╔════════════════════════════════════════════╗
-                        ║           FINANCIAL CALCULATOR             ║
-                        ╠════════════════════════════════════════════╣
-                        ║                                            ║
-                        ║   [1] 🏠 Mortgage Calculator               ║
-                        ║   [2] 💰 Future Value Calculator           ║
-                        ║   [3] ❌ Exit                              ║
-                        ║                                            ║
-                        ╚════════════════════════════════════════════╝
+                ╔════════════════════════════════════════════╗
+                ║           FINANCIAL CALCULATOR             ║
+                ╠════════════════════════════════════════════╣
+                ║                                            ║
+                ║   [M] 🏠 Mortgage Calculator               ║
+                ║   [F] 💰 Future Value Calculator           ║
+                ║   [P] 📊 Present Value Calculator          ║
+                ║   [X] ❌ Exit                              ║
+                ║                                            ║
+                ╚════════════════════════════════════════════╝
                 
                 """ + RESET);
     }
-
     /* This method declaration has several parts
      * - private: Only this class can use this method
      * - void: This method won't return anything
@@ -98,7 +96,6 @@ public class CalculatorApp {
                 
                 """.formatted(message) + RESET); // this puts the message where the %s is
     }
-
     public void start() {
 
         displayWelcomeBanner();
@@ -119,6 +116,10 @@ public class CalculatorApp {
                         break;
                     case "F":
                         FutureValueCalculator futureValueCalculator = new FutureValueCalculator();
+                        futureValueCalculator.calculate();
+                    case "P":
+                        PresentValueCalculator presentValueCalculator = new PresentValueCalculator();
+                        presentValueCalculator.calculate();
                         break;
                     case "X":
                         System.out.println(CYAN + """
@@ -141,8 +142,8 @@ public class CalculatorApp {
             }
         }
     }
-
-
-
+    public static void main(String[] args) {
+        CalculatorApp app = new CalculatorApp();
+        app.start();
+    }
 }
-// This is a method that starts our program + displays the main menu
