@@ -9,7 +9,7 @@ import java.util.Scanner;
 // Class that encompasses all the code for the app
 public class CalculatorApp {
 
-    /* 'Private' is an access modifier that makes these variables only
+    /** 'Private' is an access modifier that makes these variables only
      able to be used in this class. 'Scanner' is a class from Java's library while
      'userInput' is the name of our scanner variable. We can name it whatever we want but
      its best practice for the name to tell us about what it does. The benefit of making
@@ -18,9 +18,9 @@ public class CalculatorApp {
     private final Scanner userInput;
     private NumberFormat currencyFormatter;
 
-    //These statements let us add color to our text
-    // 'public static final' means they can be used anywhere and won't change
-    // 'String RESET' just changes the text back to its normal color
+   /** These statements let us add color to our text
+     'public static final' means they can be used anywhere and won't change
+    'String RESET' just changes the text back to its normal color */
 
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
@@ -35,9 +35,10 @@ public class CalculatorApp {
     // Method to display welcome banner when program starts
     private void displayWelcomeBanner() {
 
-        /* Triple quotes (""") are used for multi-line text blocks.
+        /** Triple quotes (""") are used for multi-line text blocks.
         They eliminate the need for escape characters (\n), maintain
-        formatting, and make creating ASCII art easier*/
+        formatting, and make creating ASCII art easier */
+
         System.out.println(BLUE + """
                 ╔════════════════════════════════════════════╗
                 ║                                            ║
@@ -47,7 +48,7 @@ public class CalculatorApp {
                 """ + RESET);
     }
 
-    /* Constructor always has the same name as the class and there can be
+    /**Constructor always has the same name as the class and there can be
      * more than one within a single class.It tells Java how to 'set up' any
      * new objects that are created*/
     public CalculatorApp() {
@@ -55,7 +56,7 @@ public class CalculatorApp {
         // 'system.in tells this variable to 'read from the keyboard'
         userInput = new Scanner(System.in);
 
-        /* This statement has several parts
+        /** This statement has several parts
          * -currencyFormater: The variable's name
          * -NumberFormat: Class that formats numbers as money.
          * adds the correct currency symbol, commas, and decimal places*/
@@ -77,33 +78,31 @@ public class CalculatorApp {
                 
                 """ + RESET);
     }
-    /* This method declaration has several parts
-     * - private: Only this class can use this method
-     * - void: This method won't return anything
-     * - showError: Name of the method
-     * -String message : Takes a message as input
+    /** This method declaration has several parts
+     * private: Only this class can use this method
+     * void: This method won't return anything
+     * showError: Name of the method
+     * @param message : Takes a message as input
      * */
     private void showErrorMessage(String message) {
 
         // %s is a placeholder for our message since this method will be used for any error message that's returned
         System.out.println(RED + """
-                
-                        ╔════════════ ERROR ══════════════╗   
+               \s
+                        ╔════════════ ERROR ══════════════╗  \s
                         ║ %s                              ║
                         ╚═════════════════════════════════╝
-                
-                
-                
-                """.formatted(message) + RESET); // this puts the message where the %s is
+               \s
+               \s
+               \s
+               \s""".formatted(message) + RESET); // this puts the message where the %s is
     }
     public void start() {
-
         displayWelcomeBanner();
+        System.out.println(YELLOW + "Hello! Which calculator would you like to use? Pick a letter for your choice: " + RESET);
 
         while (true) {
             displayMenu();
-
-            System.out.print(YELLOW + "Hello! Which calculator would you like to use? Pick a letter (A-C) for your choice: " + RESET);
 
             try {
                 String selection = userInput.nextLine();
@@ -111,7 +110,7 @@ public class CalculatorApp {
                 switch (selection) {
 
                     case "M":
-                        MortgageCalculator mortgageCalculator = new MortgageCalculator();
+                        MortgageCalculator mortgageCalculator = new MortgageCalculator(userInput, currencyFormatter);
                         mortgageCalculator.calculate();
                         break;
                     case "F":
@@ -142,6 +141,12 @@ public class CalculatorApp {
             }
         }
     }
+
+    /**
+     * The main method is placed at the bottom of the class to prioritize
+     * reading the class's properties and behaviors before its entry point.
+     * This improves code readability by following a logical top-down structure.
+     */
     public static void main(String[] args) {
         CalculatorApp app = new CalculatorApp();
         app.start();
